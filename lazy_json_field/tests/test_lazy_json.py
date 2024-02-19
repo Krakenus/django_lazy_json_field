@@ -1,4 +1,5 @@
 from unittest import TestCase
+from unittest.mock import patch
 
 from lazy_json_field.utils import LazyJSONDict
 
@@ -14,3 +15,14 @@ class LazyJsonTestCase(TestCase):
         self.assertFalse(bool(lazy_json.data))
         self.assertEqual(lazy_json['key'], 'value')
         self.assertTrue(bool(lazy_json.data))
+
+    def test_lazy_parse_called(self):
+        lazy_json = LazyJSONDict(self.raw_json)
+        with patch('lazy_json_field.utils.LazyJSONDict._parse_data') as parse_data:
+            self.assertEqual(str(lazy_json), self.raw_json)
+            self.assertFalse(parse_data.called)
+            try:
+                self.assertEqual(lazy_json['key'], 'value')
+            except KeyError:
+                pass
+            self.assertTrue(parse_data.assert_called_once)

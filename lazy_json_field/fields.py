@@ -1,9 +1,13 @@
 from django.db.models.fields.json import JSONField, KeyTransform
 
-from lazy_json_field.utils import LazyJSONDict
+from lazy_json_field.lazy_json import LazyJSONDict, LazyJSONEncoder
 
 
 class LazyJSONField(JSONField):
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('encoder', LazyJSONEncoder)
+        super().__init__(*args, **kwargs)
 
     def from_db_value(self, value, expression, connection):
         if value is None:

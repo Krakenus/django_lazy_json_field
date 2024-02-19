@@ -2,6 +2,14 @@ import json
 from collections import UserDict
 
 
+class LazyJSONEncoder(json.JSONEncoder):
+
+    def encode(self, o):
+        if isinstance(o, LazyJSONDict):
+            return str(o)
+        return super().encode(o)
+
+
 class LazyJSONDict(UserDict):
 
     def __init__(self, data, /, decoder=None, **kwargs):

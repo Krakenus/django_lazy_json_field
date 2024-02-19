@@ -12,17 +12,17 @@ class LazyJsonTestCase(TestCase):
         lazy_json = LazyJSONDict(self.raw_json)
 
         self.assertEqual(str(lazy_json), self.raw_json)
-        self.assertFalse(bool(lazy_json.data))
+        self.assertFalse(bool(lazy_json._parsed_data))
         self.assertEqual(lazy_json['key'], 'value')
-        self.assertTrue(bool(lazy_json.data))
+        self.assertTrue(bool(lazy_json._parsed_data))
 
     def test_lazy_parse_called(self):
         lazy_json = LazyJSONDict(self.raw_json)
-        with patch('lazy_json_field.lazy_json.LazyJSONDict._parse_data') as parse_data:
+        with patch('lazy_json_field.lazy_json.LazyJSONDict.data') as data_mock:
             self.assertEqual(str(lazy_json), self.raw_json)
-            self.assertFalse(parse_data.called)
+            self.assertFalse(data_mock.called)
             try:
                 self.assertEqual(lazy_json['key'], 'value')
             except KeyError:
                 pass
-            self.assertTrue(parse_data.assert_called_once)
+            self.assertTrue(data_mock.assert_called_once)

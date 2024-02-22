@@ -1,0 +1,133 @@
+[
+{
+  "model": "test_app.testmodel",
+  "pk": 1,
+  "fields": {
+    "name": "simple test dict",
+    "eager_data": {
+      "test": 123,
+      "lazy": false
+    },
+    "lazy_data": {
+      "test": 456,
+      "lazy": true
+    }
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 2,
+  "fields": {
+    "name": "simple test list",
+    "eager_data": [
+      "value",
+      false
+    ],
+    "lazy_data": [
+      "value",
+      true
+    ]
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 3,
+  "fields": {
+    "name": "single value 1",
+    "eager_data": 5,
+    "lazy_data": 8
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 4,
+  "fields": {
+    "name": "single value 2",
+    "eager_data": "test",
+    "lazy_data": "experiment"
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 5,
+  "fields": {
+    "name": "single value 3",
+    "eager_data": false,
+    "lazy_data": true
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 6,
+  "fields": {
+    "name": "nested list in dict",
+    "eager_data": {
+      "list": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "lazy_data": {
+      "lazy_list": [
+        5,
+        6,
+        7,
+        8
+      ]
+    }
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 7,
+  "fields": {
+    "name": "nested dict in list",
+    "eager_data": [
+      {
+        "lazy": false
+      }
+    ],
+    "lazy_data": [
+      {"lazy": true}
+    ]
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 8,
+  "fields": {
+    "name": "nested dict",
+    "eager_data": {
+      "data": {
+        "lazy": false
+      }
+    },
+    "lazy_data": {
+      "data": {
+        "lazy": true
+      }
+    }
+  }
+},
+{
+  "model": "test_app.testmodel",
+  "pk": 9,
+  "fields": {
+    "name": "nested list",
+    "eager_data": [
+      "data",
+      [
+        false
+      ]
+    ],
+    "lazy_data": [
+      "data",
+      [
+        true
+      ]
+    ]
+  }
+}
+]

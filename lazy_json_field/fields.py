@@ -32,4 +32,7 @@ class LazyJSONField(JSONField):
             return value
 
     def value_to_string(self, obj):
-        return str(self.value_from_object(obj))
+        value = super().value_to_string(obj)
+        if isinstance(value, (lazy_json.LazyJSONDict, lazy_json.LazyJSONList)):
+            return value.data
+        return value

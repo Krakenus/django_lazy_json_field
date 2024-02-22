@@ -1,17 +1,16 @@
 import json
-from collections import UserDict
+import collections
 
 
 class LazyJSONEncoder(json.JSONEncoder):
 
     def encode(self, o):
-        if isinstance(o, LazyJSONDict):
+        if isinstance(o, (LazyJSONDict, LazyJSONList)):
             return str(o)
         return super().encode(o)
 
 
-# noinspection PyMissingConstructor
-class LazyJSONDict(UserDict):
+class LazyJSONMixin:
 
     def __init__(self, data, /, decoder=None, **kwargs):
         self.__str_data = data
@@ -29,3 +28,11 @@ class LazyJSONDict(UserDict):
 
     def __str__(self):
         return self.__str_data
+
+
+class LazyJSONDict(LazyJSONMixin, collections.UserDict):
+    pass
+
+
+class LazyJSONList(LazyJSONMixin, collections.UserList):
+    pass

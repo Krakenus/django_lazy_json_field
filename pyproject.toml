@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "django-lazy-json"
+version = "0.1.0"
+description = ""
+authors = ["Milan Vlasák <krakenus02@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "lazy_json_field" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+django = ">=4.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

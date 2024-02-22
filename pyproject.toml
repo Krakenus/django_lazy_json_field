@@ -1,13 +1,16 @@
 [tool.poetry]
 name = "django-lazy-json"
 version = "0.1.0"
-description = ""
+description = "Wrapper for Django's JSONField that allows for lazy loading of the JSON object."
 authors = ["Milan Vlasák <krakenus02@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
     { include = "lazy_json_field" },
 ]
+homepage = "https://github.com/Krakenus/django_lazy_json_field"
+repository = "https://github.com/Krakenus/django_lazy_json_field"
+
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"

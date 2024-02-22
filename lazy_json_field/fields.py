@@ -1,3 +1,5 @@
+import json
+
 from django.db.models.fields.json import JSONField, KeyTransform
 
 from lazy_json_field import lazy_json
@@ -16,10 +18,18 @@ class LazyJSONField(JSONField):
         # SQL datatypes.
         if isinstance(expression, KeyTransform) and not isinstance(value, str):
             return value
+
         # the only difference from parent class
-        if value.lstrip().startswith('['):
+        value = value.lstrip()
+        if value.startswith('['):
             return lazy_json.LazyJSONList(value, decoder=self.decoder)
-        return lazy_json.LazyJSONDict(value, decoder=self.decoder)
+        if value.startswith('{'):
+            return lazy_json.LazyJSONDict(value, decoder=self.decoder)
+        try:
+            # probably a single value
+            return json.loads(value, cls=self.decoder)
+        except json.JSONDecodeError:
+            return value
 
     def value_to_string(self, obj):
         return str(self.value_from_object(obj))

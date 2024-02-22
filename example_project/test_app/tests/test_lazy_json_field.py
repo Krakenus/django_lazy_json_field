@@ -30,3 +30,11 @@ class LazyJsonTestCase(TestCase):
         except KeyError:
             pass
         self.assertIsNotNone(obj.lazy_data._parsed_data)
+
+    def test_nested_list_deferred_parsing(self):
+        obj = TestModel.objects.get(name='nested list')
+        str(obj.lazy_data)
+        self.assertIsNone(obj.lazy_data._parsed_data)
+        self.assertTrue(isinstance(obj.lazy_data, LazyJSONList))
+        self.assertTrue(obj.lazy_data[0])
+        self.assertIsNotNone(obj.lazy_data._parsed_data)

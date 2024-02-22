@@ -13,7 +13,7 @@ This package provides a `LazyJSONField` that only loads the JSON object when it'
 ## Installation
 
 ```bash
-pip install django-lazy-json-field
+pip install django-lazy-json
 ```
 
 ## Usage
